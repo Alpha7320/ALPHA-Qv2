@@ -1,1 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA QUOTES - Wisdom in Two Languages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>ALPHA <span class="highlight">QUOTES</span></h1>
+                <div class="tagline">Wisdom in Two Languages</div>
+            </div>
+            <div class="header-controls">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="language-toggle" class="lang-btn">
+                    <span class="lang-text">EN</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-text">AR</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Daily Quote Section -->
+            <section class="daily-quote-section">
+                <div class="section-header">
+                    <h2 data-en="Quote of the Day" data-ar="اقتباس اليوم">Quote of the Day</h2>
+                    <div class="date-display" id="current-date"></div>
+                </div>
+                <div class="quote-card daily-quote" id="daily-quote">
+                    <div class="quote-content">
+                        <p class="quote-text" id="daily-quote-text"></p>
+                        <p class="quote-author" id="daily-quote-author"></p>
+                    </div>
+                    <div class="quote-actions">
+                        <button class="action-btn" id="daily-favorite" aria-label="Add to favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" id="daily-share" aria-label="Share quote">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                        <button class="action-btn" id="daily-copy" aria-label="Copy quote">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="categories-section">
+                <div class="section-header">
+                    <h2 data-en="Categories" data-ar="الفئات">Categories</h2>
+                    <button class="view-all-btn" data-en="View All" data-ar="عرض الكل">View All</button>
+                </div>
+                <div class="categories-container" id="categories-container">
+                    <!-- Categories will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Featured Quotes Section -->
+            <section class="featured-section">
+                <div class="section-header">
+                    <h2 data-en="Featured Quotes" data-ar="اقتباسات مميزة">Featured Quotes</h2>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all" data-en="All" data-ar="الكل">All</button>
+                        <button class="filter-tab" data-filter="popular" data-en="Popular" data-ar="شائع">Popular</button>
+                        <button class="filter-tab" data-filter="recent" data-en="Recent" data-ar="حديث">Recent</button>
+                    </div>
+                </div>
+                <div class="quotes-container" id="quotes-container">
+                    <!-- Quotes will be dynamically generated -->
+                </div>
+                <button class="load-more-btn" id="load-more" data-en="Load More" data-ar="تحميل المزيد">Load More</button>
+            </section>
+
+            <!-- Quote Creator Section -->
+            <section class="creator-section">
+                <div class="section-header">
+                    <h2 data-en="Create Your Quote" data-ar="اصنع اقتباسك">Create Your Quote</h2>
+                </div>
+                <div class="creator-container">
+                    <div class="creator-inputs">
+                        <textarea id="creator-text" placeholder="Enter your quote here..." data-en-placeholder="Enter your quote here..." data-ar-placeholder="أدخل اقتباسك هنا..."></textarea>
+                        <input type="text" id="creator-author" placeholder="Author name" data-en-placeholder="Author name" data-ar-placeholder="اسم المؤلف">
+                        <div class="creator-options">
+                            <select id="creator-category">
+                                <option value="motivation" data-en="Motivation" data-ar="تحفيز">Motivation</option>
+                                <option value="wisdom" data-en="Wisdom" data-ar="حكمة">Wisdom</option>
+                                <option value="life" data-en="Life" data-ar="الحياة">Life</option>
+                                <option value="love" data-en="Love" data-ar="حب">Love</option>
+                            </select>
+                            <div class="color-picker">
+                                <span data-en="Background:" data-ar="الخلفية:">Background:</span>
+                                <input type="color" id="creator-bg-color" value="#6366f1">
+                            </div>
+                        </div>
+                        <button class="create-btn" id="create-quote" data-en="Create Quote" data-ar="اصنع الاقتباس">Create Quote</button>
+                    </div>
+                    <div class="creator-preview" id="creator-preview">
+                        <div class="quote-card" id="preview-card">
+                            <div class="quote-content">
+                                <p class="quote-text">Your quote will appear here</p>
+                                <p class="quote-author">- Author</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Favorites Section -->
+            <section class="favorites-section">
+                <div class="section-header">
+                    <h2 data-en="My Favorites" data-ar="مفضلاتي">My Favorites</h2>
+                    <button class="clear-favorites-btn" id="clear-favorites" data-en="Clear All" data-ar="مسح الكل">Clear All</button>
+                </div>
+                <div class="favorites-container" id="favorites-container">
+                    <p class="empty-favorites" data-en="No favorites yet. Start adding quotes you love!" data-ar="لا توجد مفضلات بعد. ابدأ بإضافة الاقتباسات التي تحبها!">No favorites yet. Start adding quotes you love!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-page="home" aria-label="Home">
+                <i class="fas fa-home"></i>
+                <span data-en="Home" data-ar="الرئيسية">Home</span>
+            </button>
+            <button class="nav-btn" data-page="search" aria-label="Search">
+                <i class="fas fa-search"></i>
+                <span data-en="Search" data-ar="بحث">Search</span>
+            </button>
+            <button class="nav-btn" data-page="create" aria-label="Create">
+                <i class="fas fa-plus-circle"></i>
+                <span data-en="Create" data-ar="إنشاء">Create</span>
+            </button>
+            <button class="nav-btn" data-page="favorites" aria-label="Favorites">
+                <i class="fas fa-heart"></i>
+                <span data-en="Favorites" data-ar="المفضلات">Favorites</span>
+            </button>
+            <button class="nav-btn" data-page="profile" aria-label="Profile">
+                <i class="fas fa-user"></i>
+                <span data-en="Profile" data-ar="الملف الشخصي">Profile</span>
+            </button>
+        </nav>
+
+        <!-- Search Modal -->
+        <div class="modal" id="search-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-en="Search Quotes" data-ar="بحث في الاقتباسات">Search Quotes</h2>
+                    <button class="close-modal" id="close-search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-container">
+                    <div class="search-input-container">
+                        <input type="text" id="search-input" placeholder="Search by keyword, author, or category..." data-en-placeholder="Search by keyword, author, or category..." data-ar-placeholder="بحث بالكلمة الرئيسية، المؤلف، أو الفئة">
+                        <button id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label data-en="Category:" data-ar="الفئة:">Category:</label>
+                            <select id="search-category">
+                                <option value="all" data-en="All Categories" data-ar="جميع الفئات">All Categories</option>
+                                <option value="motivation" data-en="Motivation" data-ar="تحفيز">Motivation</option>
+                                <option value="wisdom" data-en="Wisdom" data-ar="حكمة">Wisdom</option>
+                                <option value="life" data-en="Life" data-ar="الحياة">Life</option>
+                                <option value="love" data-en="Love" data-ar="حب">Love</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label data-en="Language:" data-ar="اللغة:">Language:</label>
+                            <select id="search-language">
+                                <option value="all" data-en="All" data-ar="الكل">All</option>
+                                <option value="en" data-en="English" data-ar="الإنجليزية">English</option>
+                                <option value="ar" data-en="Arabic" data-ar="العربية">Arabic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-results" id="search-results">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification -->
+        <div class="notification" id="notification">
+            <div class="notification-content">
+                <i class="fas fa-check-circle"></i>
+                <p id="notification-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
